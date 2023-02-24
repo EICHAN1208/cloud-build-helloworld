@@ -30,4 +30,4 @@ images:
 # ユーザー定義変数
 substitutions:
   _SERVICE_NAME: "hello-world"
-  _IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/${TRIGGER_NAME}/${_BASE_NAME}:${SHORT_SHA}"
+  _IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/hello-world-image:tag1"
