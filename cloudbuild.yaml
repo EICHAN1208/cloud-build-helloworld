@@ -14,7 +14,7 @@ steps:
     [
       "run",
       "deploy",
-      "${_BASE_NAME}",
+      "hello-world",
       "--image",
       "${_IMAGE_NAME}",
       "--region",
