@@ -22,7 +22,7 @@ set :port, port
 
 get "/" do
   name = ENV["NAME"] || "World"
-  "Hello #{name}!!!"
+  "Hello #{name}!!!!!!!"
 end
 # [END run_helloworld_service]
 # [END cloudrun_helloworld_service]
