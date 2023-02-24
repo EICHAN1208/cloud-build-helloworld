@@ -10,7 +10,7 @@ RUN gem install bundler && bundle config set --local without 'test'
 
 # Copy local code to the container image.
 COPY . ./
-RUN bundle lock --add-platform x86_64-linux && bundle install
+RUN bundle config unset deployment && bundle lock --add-platform x86_64-linux && bundle install
 
 # Run the web service on container startup.
 CMD ["ruby", "./app.rb"]
