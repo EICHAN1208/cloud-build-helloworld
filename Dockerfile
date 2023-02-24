@@ -5,12 +5,13 @@ FROM ruby:2.7-slim
 # Install production dependencies.
 WORKDIR /usr/src/app
 COPY Gemfile Gemfile.lock ./
-ENV BUNDLE_FROZEN=true
+# ENV BUNDLE_FROZEN=true
 RUN gem install bundler && bundle config set --local without 'test'
 
 # Copy local code to the container image.
 COPY . ./
-RUN bundle config unset deployment && bundle lock --add-platform x86_64-linux && bundle install
+RUN bundle lock --add-platform x86_64-linux
+RUN bundle install
 
 # Run the web service on container startup.
 CMD ["ruby", "./app.rb"]
