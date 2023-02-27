@@ -1,14 +1,14 @@
 steps:
 # Docker Build
-- name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', '${_PRODUCTION_IMAGE_NAME}', '.' ]
+# - name: 'gcr.io/cloud-builders/docker'
+#   args: [ 'build', '-t', '${_PRODUCTION_IMAGE_NAME}', '.' ]
 
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', '${_STAGING_IMAGE_NAME}', '.' ]
 
 # Docker push to Artifact Registry
-- name: "gcr.io/cloud-builders/docker"
-  args: ["push", "${_PRODUCTION_IMAGE_NAME}"]
+# - name: "gcr.io/cloud-builders/docker"
+#   args: ["push", "${_PRODUCTION_IMAGE_NAME}"]
 
 - name: "gcr.io/cloud-builders/docker"
   args: ["push", "${_STAGING_IMAGE_NAME}"]
@@ -17,21 +17,21 @@ steps:
 # @note:
 #   - gcloud専用のクラウドビルダー('gcr.io/cloud-builders/gcloud')を使用するよりも、cloud-sdkの使用が推奨されている
 #   - https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcloud#gcloud
-- name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
-  entrypoint: gcloud
-  args:
-    [
-      "run",
-      "deploy",
-      "hello-world",
-      "--image",
-      "${_PRODUCTION_IMAGE_NAME}",
-      "--region",
-      "asia-northeast1",
-      "--platform",
-      "managed",
-      "--allow-unauthenticated",
-    ]
+# - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+#   entrypoint: gcloud
+#   args:
+#     [
+#       "run",
+#       "deploy",
+#       "hello-world",
+#       "--image",
+#       "${_PRODUCTION_IMAGE_NAME}",
+#       "--region",
+#       "asia-northeast1",
+#       "--platform",
+#       "managed",
+#       "--allow-unauthenticated",
+#     ]
 
 - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
   entrypoint: gcloud
@@ -51,5 +51,5 @@ steps:
 
 # ユーザー定義変数
 substitutions:
-  _PRODUCTION_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/hello-world-image"
+  # _PRODUCTION_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/hello-world-image"
   _STAGING_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/staging-hello-world-image"
