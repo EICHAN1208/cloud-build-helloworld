@@ -1,17 +1,17 @@
 steps:
 # Docker Build
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', '${PRODUCTION_IMAGE_NAME}', '.' ]
+  args: [ 'build', '-t', '${_PRODUCTION_IMAGE_NAME}', '.' ]
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', '${STAGING_IMAGE_NAME}', '.' ]
+  args: [ 'build', '-t', '${_STAGING_IMAGE_NAME}', '.' ]
 
 # Docker push to Artifact Registry
 - name: "gcr.io/cloud-builders/docker"
-  args: ["push", "${PRODUCTION_IMAGE_NAME}"]
+  args: ["push", "${_PRODUCTION_IMAGE_NAME}"]
 
 - name: "gcr.io/cloud-builders/docker"
-  args: ["push", "${STAGING_IMAGE_NAME}"]
+  args: ["push", "${_STAGING_IMAGE_NAME}"]
 
 # Deploy to Cloud Run
 # @note:
@@ -25,7 +25,7 @@ steps:
       "deploy",
       "hello-world",
       "--image",
-      "${PRODUCTION_IMAGE_NAME}",
+      "${_PRODUCTION_IMAGE_NAME}",
       "--region",
       "asia-northeast1",
       "--platform",
@@ -41,7 +41,7 @@ steps:
       "deploy",
       "staging-hello-world",
       "--image",
-      "${STAGING_IMAGE_NAME}",
+      "${_STAGING_IMAGE_NAME}",
       "--region",
       "asia-northeast1",
       "--platform",
@@ -52,5 +52,5 @@ steps:
 # ユーザー定義変数
 substitutions:
   _SERVICE_NAME: "hello-world"
-  PRODUCTION_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/hello-world-image"
-  STAGING_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/staging-hello-world-image"
+  _PRODUCTION_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/hello-world-image"
+  _STAGING_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/staging-hello-world-image"
