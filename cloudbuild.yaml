@@ -51,6 +51,5 @@ steps:
 
 # ユーザー定義変数
 substitutions:
-  _SERVICE_NAME: "hello-world"
   _PRODUCTION_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/hello-world-image"
   _STAGING_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/staging-hello-world-image"
