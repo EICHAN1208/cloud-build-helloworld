@@ -3,15 +3,15 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', '${_PRODUCTION_IMAGE_NAME}', '.' ]
 
-- name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', '${_STAGING_IMAGE_NAME}', '.' ]
+# - name: 'gcr.io/cloud-builders/docker'
+#   args: [ 'build', '-t', '${_STAGING_IMAGE_NAME}', '.' ]
 
 # Docker push to Artifact Registry
 - name: "gcr.io/cloud-builders/docker"
   args: ["push", "${_PRODUCTION_IMAGE_NAME}"]
 
-- name: "gcr.io/cloud-builders/docker"
-  args: ["push", "${_STAGING_IMAGE_NAME}"]
+# - name: "gcr.io/cloud-builders/docker"
+#   args: ["push", "${_STAGING_IMAGE_NAME}"]
 
 # Deploy to Cloud Run
 # @note:
@@ -33,23 +33,23 @@ steps:
       "--allow-unauthenticated",
     ]
 
-- name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
-  entrypoint: gcloud
-  args:
-    [
-      "run",
-      "deploy",
-      "staging-hello-world",
-      "--image",
-      "${_STAGING_IMAGE_NAME}",
-      "--region",
-      "asia-northeast1",
-      "--platform",
-      "managed",
-      "--allow-unauthenticated",
-    ]
+# - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+#   entrypoint: gcloud
+#   args:
+#     [
+#       "run",
+#       "deploy",
+#       "staging-hello-world",
+#       "--image",
+#       "${_STAGING_IMAGE_NAME}",
+#       "--region",
+#       "asia-northeast1",
+#       "--platform",
+#       "managed",
+#       "--allow-unauthenticated",
+#     ]
 
 # ユーザー定義変数
 substitutions:
   _PRODUCTION_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/hello-world-image"
-  _STAGING_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/staging-hello-world-image"
+  # _STAGING_IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/demo-helloworld/staging-hello-world-image"
